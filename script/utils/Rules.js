@@ -4,7 +4,7 @@ NETWORK.RULES = {
 		ObjectIdentifiers : {
 			// The structure of the Beginning Data has been upated 
 			BeginningData: {
-				"AreaData" : ['%% area data','mpc.areas = \\[','mpc.areas= \\[','mpc.areas= \\['],
+				"AreaData" : ['%% area data','mpc.areas = \\[','mpc.areas= \\[','mpc.areas =\\['],
 				"BusData" : ['%% bus data','mpc.bus = \\[','mpc.bus= \\[','mpc.bus =\\['],
 				"GeneratorData" : ['%% generator data','mpc.gen = \\[','mpc.gen= \\[','mpc.gen =\\['],
 				"GeneratorCostData" : ['mpc.gencost = \\[','mpc.gencost= \\[','mpc.gencost =\\['],
@@ -24,7 +24,7 @@ NETWORK.RULES = {
 		},
 		//The following array is used to get the starting index of the content for data object.
 		startIndexIdentifire : [
-		'mpc.areas = [','mpc.areas= [','mpc.areas= [','mpc.bus = [','mpc.bus= [','mpc.bus =[','mpc.gen = [','mpc.gen= [','mpc.gen =[','mpc.gencost = [','mpc.gencost= [','mpc.gencost =[','mpc.branch = [','mpc.branch= [','mpc.branch =[','mpc.buslocation = ['
+		'mpc.areas = [','mpc.areas= [','mpc.areas =[','mpc.bus = [','mpc.bus= [','mpc.bus =[','mpc.gen = [','mpc.gen= [','mpc.gen =[','mpc.gencost = [','mpc.gencost= [','mpc.gencost =[','mpc.branch = [','mpc.branch= [','mpc.branch =[','mpc.buslocation = [','mpc.buslocation= [','mpc.buslocation =['
 		],
 		HardCodedDefaultProperties: {
 			/*Similar to bus location data updates also need to be made for other elements. The property count starts at 1 thus the first element needs to be dummy for all the cases*/
@@ -40,7 +40,7 @@ NETWORK.RULES = {
 	dataHeaders : {
 		// The structure of the Beginning Data has been upated 
 		BeginningData: {
-			"AreaData" : ['%% area data','mpc.areas = \\[','mpc.areas= \\[','mpc.areas= \\['],
+			"AreaData" : ['%% area data','mpc.areas = \\[','mpc.areas= \\[','mpc.areas =\\['],
 			"BusData" : ['%% bus data','mpc.bus = \\[','mpc.bus= \\[','mpc.bus =\\['],
 			"GeneratorData" : ['%% generator data','mpc.gen = \\[','mpc.gen= \\[','mpc.gen =\\['],
 			"GeneratorCostData" : ['%% generator cost data','mpc.gencost = \\[','mpc.gencost= \\[','mpc.gencost =\\['],

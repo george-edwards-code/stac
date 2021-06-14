@@ -123,21 +123,29 @@
 		//The object name is used to identify the name of the properties.
 		objProperties = NETWORK.RULES.parser.HardCodedDefaultProperties[rawDataObj.name];
 		
-		//Dynamically finding the starting point of the data and then  parsing the data object from there on.
+		//Dynamically finding the starting point of the data and then parsing the data object from there on.
 		for(i = 0; i < content.length; i++) {
 			s = content[i].toString().replace(/(\r\n|\n|\r)/gm,"");
-			if(o.indexOf(s.substring(0, s.indexOf("[") + 1)) !== -1) {
-				valStartIndex = ++i;
-				//content.length-1 has been taken because the index starts from 0 whereas the length is calculated from 1.
-				for(valIndexer = valStartIndex; valIndexer < (content.length-1); valIndexer++)
+
+			if(o.indexOf(s.substring(0, s.indexOf("[") + 1)) !== -1) { // checks that s is in o
+				// valStartIndex = ++i;
+				valStartIndex = i;
+
+				for(valIndexer = valStartIndex; valIndexer < (content.length); valIndexer++)
 				{
 					crtContent = $.trim(content[valIndexer]);
 					
-					//Updated the condition for the content parsing to include the check for the '%' in the line. The parsing is done only if the first element in the line is not %.
-					if((crtContent !== "") && (crtContent.indexOf("%") !== 0)) {
-						if(crtContent.indexOf(' ') !== -1)	{
-							crtContent = crtContent.replace(/\s{1,}/g, '\t');
-						}
+					//handle single-line arrays by removing array declarators
+					let arrayStartPattern = crtContent.substring(0, crtContent.indexOf("[") + 1);
+					crtContent = crtContent.replace(arrayStartPattern, "");
+					crtContent = crtContent.replace(/[\];];/, "");
+					 
+					//remove any in-line comments (% comment example)
+					crtContent = crtContent.replace(/%.*/, "");
+					
+					if(crtContent !== "") {
+						// transform white-space to tabs, split values on tabs into array
+						crtContent = crtContent.replace(/\s{1,}/g, '\t');
 						eachObjectData = crtContent.split('\t');
 						
 						actualDataObj = {};
@@ -152,10 +160,12 @@
 						
 						for(propIndexer = 0; propIndexer < objProperties.length; propIndexer++)
 						{
-							if (propIndexer < eachObjectData.length)
+							if (propIndexer < eachObjectData.length) {
 								actualDataObj[objProperties[propIndexer]] = this.beautifyValue((eachObjectData[propIndexer]).toString());
-							else
-								actualDataObj[objProperties[propIndexer]] = 0
+							}
+							else {
+								actualDataObj[objProperties[propIndexer]] = '0.0';
+							}
 						}
 						dataObjectWrapper.dataObjList.push(actualDataObj);
 					}		
